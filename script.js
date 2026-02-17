@@ -131,3 +131,38 @@ document.addEventListener("keydown", (e) => {
   // small delay so it feels intentional
   setTimeout(type, 350);
 })();
+
+// ===== Contact Formspree Success Handling =====
+const form = document.getElementById("contact-form");
+const hint = document.getElementById("form-hint");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault(); // stop page redirect
+
+  hint.textContent = "Sending...";
+  hint.style.color = "var(--muted)";
+
+  const formData = new FormData(form);
+
+  try {
+    const response = await fetch(form.action, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    if (response.ok) {
+      hint.textContent = "Message sent successfully! Thank you.";
+      hint.style.color = "var(--success)";
+      form.reset();
+    } else {
+      hint.textContent = "Something went wrong. Please try again.";
+      hint.style.color = "var(--error)";
+    }
+  } catch (error) {
+    hint.textContent = "Network error. Please check your connection.";
+    hint.style.color = "var(--error)";
+  }
+});

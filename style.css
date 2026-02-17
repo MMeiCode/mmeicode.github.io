@@ -39,6 +39,10 @@
   /* Spacing */
   --pad-x: 18px;
   --font-script: "Allura", cursive;
+
+  /* Hints */
+  --success: #2f6f3a;
+  --error: #9b2c2c;
 }
 
 * { box-sizing: border-box; }
@@ -162,7 +166,6 @@ body {
 .hero-script{
   position: absolute;
 
-  /* move it higher and slightly to the right */
   left: 0rem;
   top: -6rem;
 
@@ -171,10 +174,9 @@ body {
   gap: 10px;
 
   font-family: var(--font-script);
-  font-size: clamp(3.6rem, 6vw, 5.2rem); /* BIG, bigger than name */
+  font-size: clamp(3.6rem, 6vw, 5.2rem); 
   line-height: 1;
 
-  /* darker + more confident */
   color: var(--text);
   opacity: 0.55;
 
@@ -358,9 +360,9 @@ input:focus, textarea:focus {
 }
 
 .form-hint {
-  color: var(--muted-2);
-  margin: 8px 0 0;
-  min-height: 1.2em;
+  margin-top: 10px;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
 }
 
 .gallery-grid {
@@ -477,4 +479,58 @@ input:focus, textarea:focus {
 /* Prevent background scroll when modal open */
 body.modal-open{
   overflow: hidden;
+}
+
+@media (max-width: 860px){
+
+  /* Stack + center everything */
+  .hero{
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+    gap: 18px;
+  }
+
+  .hero-left{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Center title + name */
+  .hero-title{
+    text-align: center;
+    padding-bottom: 0;
+  }
+
+  h1{
+    text-align: center;
+  }
+
+  /* Subtitle + blurb centered */
+  .subtitle,
+  .blurb{
+    text-align: center;
+    max-width: 520px;
+  }
+
+  /* Buttons centered */
+  .hero-cta{
+    justify-content: center;
+  }
+
+  /* Headshot centered */
+  .hero-right{
+    display: flex;
+    justify-content: center;
+  }
+
+  .img-headshot{
+    margin: 0 auto;
+  }
+
+  /* Hide script label already handled */
+  .hero-script{
+    display: none;
+  }
 }
